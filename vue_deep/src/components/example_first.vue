@@ -7,6 +7,33 @@
 <script>
 export default {
   name: 'ExampleFirst',
+  beforeCreate() {
+    console.log('this.amount beforeCreate ', this.amount);
+    this.amount = 1;
+  },
+  created() {
+    console.log('this.amount created ', this.amount);
+    this.amount = 2;
+  },
+  beforeMount() {
+    console.log('this.amount beforeMount ', this.amount);
+    this.amount = 3;
+  },
+  mounted() {
+    console.log('this.amount mounted ', this.amount);
+    console.log('this.$el mounted ', this.$el);
+    this.amount = 4;
+  },
+  beforeUnmount() {
+    console.log('this.amount beforeDestroy ', this.amount);
+    console.log('this.$el beforeDestroy ', this.$el);
+    this.amount = 5;
+  },
+  unmounted() {
+    console.log('this.amount destroyed ', this.amount);
+    console.log('this.$el destroyed ', this.$el);
+    this.amount = 6;
+  },
   data() {
     return {
       amount: 0,
@@ -18,13 +45,6 @@ export default {
       console.log(newVal);
     },
   },
-
-  beforeCreate() {  this.amount = 1; },
-  created() {       this.amount = 2; },
-  beforeMount() {   this.amount = 3; },
-  mounted() {       this.amount = 4; },
-  beforeUnmount() { this.amount = 5; },
-  unmounted() {     this.amount = 6; },
 };
 
 /*
@@ -70,7 +90,7 @@ instance компонента все еще доступен $el тоже;
 он не вызывается при sever-side rendering
 
 unmounted - вызывается после размонтирования компонента
-
+instance компонента все еще доступен $el тоже;
 Что значит размонтирован?
 
 а) размонтирован из DOM и все его дочерние тоже
