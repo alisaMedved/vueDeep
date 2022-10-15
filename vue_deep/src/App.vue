@@ -1,23 +1,29 @@
 <template>
   <div id="app">
-    <ExampleFirst v-if="flagComponentAppear" />
-    <button @click="onClick">
-      нажми чтобы исчез/появился компонент
-    </button>
-    <ExampleBoolean/>
+<!--    <ExampleFirst v-if="flagComponentAppear" />-->
+<!--    <button @click="onClick">-->
+<!--      нажми чтобы исчез/появился компонент-->
+<!--    </button>-->
+<!--    <ExampleBoolean/>-->
+<!--    <ExampleRefTwo/>-->
+    <RefPowerFirst />
   </div>
 </template>
 
 <script>
 
-import ExampleFirst from './components/example_first';
-import ExampleBoolean from './components/example_boolean';
+// import ExampleFirst from './components/example_first';
+// import ExampleBoolean from './components/example_boolean';
+// import ExampleRefTwo from './components/example_ref_two';
+import RefPowerFirst from './components/powers_ref/example_first';
 
 export default {
   name: 'App',
   components: {
-    ExampleFirst,
-    ExampleBoolean
+    // ExampleFirst,
+    // ExampleBoolean,
+    // ExampleRefTwo,
+    RefPowerFirst,
   },
   data() {
     return {
