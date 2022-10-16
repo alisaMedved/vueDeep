@@ -1,5 +1,9 @@
 import {ref, shallowRef, onMounted, onBeforeUnmount} from 'vue';
 
+// поздравляем это composable function - то есть функция использующая composition Api
+// и содержащая логику по управлению/отслеживанию состояния
+
+//... то есть это по реактовски Кастомный хук!
 export function useDimension (dimension = 'width') {
     const element = ref();
     const functionRef = el => {
@@ -23,3 +27,9 @@ console.log(element);
     })
     return functionRef;
 }
+
+/** А откуда вообще название composition Api?
+ * composition Api позволяет вкладывать в друг друга эти кастомные хуки (compasebles)
+ * и в честь это было названо composition - композиция изолированных блоков логики
+ * **
+ */

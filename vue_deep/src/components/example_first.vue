@@ -5,9 +5,12 @@
 </template>
 
 <script>
+import {getCurrentInstance} from "vue";
+
 export default {
   name: 'ExampleFirst',
   beforeCreate() {
+    console.log(getCurrentInstance());
     console.log('this.amount beforeCreate ', this.amount);
     this.amount = 1;
   },
@@ -20,6 +23,7 @@ export default {
     this.amount = 3;
   },
   mounted() {
+    console.log(getCurrentInstance());
     console.log('this.amount mounted ', this.amount);
     console.log('this.$el mounted ', this.$el);
     this.amount = 4;
@@ -30,6 +34,7 @@ export default {
     this.amount = 5;
   },
   unmounted() {
+    console.log(getCurrentInstance());
     console.log('this.amount destroyed ', this.amount);
     console.log('this.$el destroyed ', this.$el);
     this.amount = 6;
@@ -96,14 +101,20 @@ instance компонента все еще доступен $el тоже;
 а) размонтирован из DOM и все его дочерние тоже
 б) остановлены watcher computed и все side effects.
 в) Здесь согласно доке надо очищать таймауты, удалять обработчик события и отписываться от него,
-и вообще очичтить и отписаться от все сайд эффектов своих. Это разнится с докой Vue2у которой
+и вообще очичтить и отписаться от все сайд эффектов своих. Это разнится с докой Vue2 у которой
 это все рекомендовала дока делать в beforeDestroy.
 
-Vue отпишется от наблюдения за изменением переменной перед вызовом хуков beforeDestroy и destroyed, поэтому 5 и 6 не попадут в консоль.
+Vue отпишется от наблюдения за изменением переменной перед вызовом хуков beforeDestroy и destroyed,
+поэтому 5 и 6 не попадут в консоль.
 
 3 и 4  выводится во vue3 и только 4 выводится во vue2. Почему?
 
-
-
+Есть пара моментов про методы жизненного цикла:
+1) Во вью они называются хуками, а то что в react называется хуком во вью называется композамбл
+(да смешно)
+2) vue все равно синхронный или несинхронный код написан в методе  - и от того что вы написали async
+рядом с названием метода жизненого цикла, то ничего не поменяется. Вью не предусматривает какого-то особенного поведения для
+ассинхронных методов жизненного цикла (в народе их зовут ассинхронные хуки - вот хоть убей).
+3) есть getCurrentInstance - выводит экземпляр в его текущем состоянии (наверно иногда полезно дебажить)
 * */
 </script>
